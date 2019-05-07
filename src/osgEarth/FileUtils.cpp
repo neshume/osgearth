@@ -48,6 +48,27 @@
 #include <list>
 #include <sstream>
 
+
+namespace osgDB
+{
+#ifdef OSG_USE_UTF8_FILENAME
+#define OSGDB_STRING_TO_FILENAME(s) osgDB::convertUTF8toUTF16(s)
+#define OSGDB_FILENAME_TO_STRING(s) osgDB::convertUTF16toUTF8(s)
+#define OSGDB_FILENAME_TEXT(x) L ## x
+#define OSGDB_WINDOWS_FUNCT(x) x ## W
+#define OSGDB_WINDOWS_FUNCT_STRING(x) #x "W"
+typedef wchar_t filenamechar;
+typedef std::wstring filenamestring;
+#else
+#define OSGDB_STRING_TO_FILENAME(s) s
+#define OSGDB_FILENAME_TO_STRING(s) s
+#define OSGDB_FILENAME_TEXT(x) x
+#define OSGDB_WINDOWS_FUNCT(x) x ## A
+#define OSGDB_WINDOWS_FUNCT_STRING(x) #x "A"
+typedef char filenamechar;
+typedef std::string filenamestring;
+#endif
+}
 // currently this impl is for _all_ platforms, except as defined.
 // the mac version will change soon to reflect the path scheme under osx, but
 // for now, the above include is commented out, and the below code takes precedence.

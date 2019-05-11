@@ -22,6 +22,7 @@
 #include <osgEarth/DateTime>
 #include <osgDB/FileUtils>
 #include <osgDB/FileNameUtils>
+#include <osgDB/convertUTF>
 #include <osgDB/Registry>
 #include <osg/Notify>
 #include <stack>
